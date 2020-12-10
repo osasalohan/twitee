@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createPost } from "../store/actions/post";
+import { createComment } from "../store/actions/post";
 
-const AddTwit = (props) => {
+const AddComment = (props) => {
   const dispatch = useDispatch();
 
   const [text, setText] = useState("");
 
   const userId = useSelector((state) => state.currentUser.user.id);
 
-  const handleTwitSubmit = (e) => {
+  const handleCommentSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPost(userId, { text }));
+    dispatch(createComment(userId, props.postId, { text }));
     setText("");
   };
 
   return (
-    <form onSubmit={handleTwitSubmit}>
+    <form onSubmit={handleCommentSubmit}>
       <input
         className="form-control"
         type="text"
@@ -28,13 +28,13 @@ const AddTwit = (props) => {
       />
       <button
         type="button"
-        onClick={handleTwitSubmit}
+        onClick={handleCommentSubmit}
         className="btn btn-primary"
       >
-        Add twit
+        Add comment
       </button>
     </form>
   );
 };
 
-export default AddTwit;
+export default AddComment;

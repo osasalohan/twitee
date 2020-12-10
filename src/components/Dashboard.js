@@ -4,7 +4,7 @@ import AddTwit from "./AddTwit.js";
 import Twits from "./Twits.js";
 
 const Dashboard = (props) => (
-  <div class="row">
+  <div className="row">
     <div className="col-lg-4">
       <Profile />
     </div>

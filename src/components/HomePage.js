@@ -3,7 +3,7 @@ import Welcome from "./Welcome";
 import Dashboard from "./Dashboard";
 
 const HomePage = (props) => {
-  return props.user ? <Dashboard /> : <Welcome />;
+  return props.user.name ? <Dashboard /> : <Welcome />;
 };
 
 export default HomePage;

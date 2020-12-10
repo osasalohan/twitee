@@ -37,6 +37,7 @@ export const deletePost = (id, postId) => (dispatch) => {
     )
       .then(() => {
         fetchPosts(id);
+        resolve();
       })
       .catch((err) => {
         dispatch(addError(err.message));
@@ -53,6 +54,7 @@ export const likePost = (id, postId) => (dispatch) => {
     )
       .then(() => {
         fetchPosts(id);
+        resolve();
       })
       .catch((err) => {
         dispatch(addError(err.message));
@@ -80,11 +82,12 @@ export const createComment = (id, postId, comment) => (dispatch) => {
   return new Promise((resolve, reject) => {
     return apiCall(
       "post",
-      `https://twitee-api.herokuapp.com/${id}/posts/${postId}`,
+      `https://twitee-api.herokuapp.com/${id}/posts/${postId}/comments`,
       comment
     )
       .then(() => {
         fetchPosts(id);
+        resolve();
       })
       .catch((err) => {
         dispatch(addError(err.message));
