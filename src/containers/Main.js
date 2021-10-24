@@ -9,18 +9,25 @@ import { removeError } from "../store/actions/error";
 const Main = (props) => {
   const user = useSelector((state) => state.currentUser.user);
   const error = useSelector((state) => state.error);
+  const loading = useSelector((state) => state.currentUser.loading);
 
   return (
     <div className="container-fluid">
       <Switch>
         <Route exact path="/">
-          <HomePage user={user} removeError={removeError} error={error} />
+          <HomePage
+            user={user}
+            removeError={removeError}
+            error={error}
+            loading={loading}
+          />
         </Route>
         <Route exact path="/signin">
           <SignInForm
             removeError={removeError}
             error={error}
             authUser={authUser}
+            loading={loading}
           />
         </Route>
         <Route exact path="/signup">
@@ -28,6 +35,7 @@ const Main = (props) => {
             removeError={removeError}
             error={error}
             authUser={authUser}
+            loading={loading}
             register
           />
         </Route>

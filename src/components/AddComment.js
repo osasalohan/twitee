@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createComment } from "../store/actions/post";
+import Loader from "./Loader";
 
 const AddComment = (props) => {
   const dispatch = useDispatch();
@@ -8,6 +9,7 @@ const AddComment = (props) => {
   const [text, setText] = useState("");
 
   const userId = useSelector((state) => state.currentUser.user.id);
+  const loading = useSelector((state) => state.currentUser.loading);
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +33,7 @@ const AddComment = (props) => {
         onClick={handleCommentSubmit}
         className="btn btn-primary"
       >
-        Add comment
+        {loading ? <Loader /> : "Add comment"}
       </button>
     </form>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../store/actions/post";
+import Loader from "./Loader";
 
 const AddTwit = (props) => {
   const dispatch = useDispatch();
@@ -8,6 +9,7 @@ const AddTwit = (props) => {
   const [text, setText] = useState("");
 
   const userId = useSelector((state) => state.currentUser.user.id);
+  const loading = useSelector((state) => state.currentUser.loading);
 
   const handleTwitSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +33,7 @@ const AddTwit = (props) => {
         onClick={handleTwitSubmit}
         className="btn btn-primary"
       >
-        Add twit
+        {loading ? <Loader /> : "Add twit"}
       </button>
     </form>
   );
