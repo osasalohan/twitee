@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";
 import { deletePost, likePost } from "../store/actions/post";
 import AddComment from "./AddComment";
+import Loader from "./Loader";
 
 const Twit = (props) => {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.currentUser.user);
+  const loading = useSelector((state) => state.currentUser.loading);
 
   const { twit } = props;
 
@@ -29,7 +31,7 @@ const Twit = (props) => {
       </p>
       {twit.user._id === user.id ? (
         <button onClick={handleDeleteTwit} className="btn btn-danger">
-          Delete twit
+          {loading ? <Loader /> : "Delete twit"}
         </button>
       ) : (
         ""

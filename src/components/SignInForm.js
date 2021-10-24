@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
+import Loader from "./Loader";
 
 const SignInForm = (props) => {
   const [email, setEmail] = useState("");
@@ -9,11 +10,11 @@ const SignInForm = (props) => {
 
   const dispatch = useDispatch();
 
-  const { error, removeError, history, authUser } = props;
+  const { error, removeError, history, authUser, loading, register } = props;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    (props.register
+    (register
       ? dispatch(authUser("signup", { email, password }))
       : dispatch(authUser("signin", { email, password }))
     )
@@ -63,16 +64,16 @@ const SignInForm = (props) => {
             onClick={handleSubmit}
             className="btn btn-primary"
           >
-            {props.register ? "Sign Up" : "Log In"}
+            {loading ? <Loader /> : register ? "Sign Up" : "Log In"}
           </button>
         </form>
         <div className="mt-2">
-          <p>{props.register ? "Already" : "Don't"} have an account? </p>
+          <p>{register ? "Already" : "Don't"} have an account? </p>
           <Link
-            to={props.register ? "/signin" : "/signup"}
+            to={register ? "/signin" : "/signup"}
             className="btn btn-primary"
           >
-            {props.register ? "Log In" : "Sign Up"}
+            {register ? "Log In" : "Sign Up"}
           </Link>
         </div>
       </div>
