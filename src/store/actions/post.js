@@ -17,12 +17,13 @@ export const addPost = (post) => ({
 
 export const createPost = (id, post) => (dispatch) => {
   dispatch(setLoading(true));
+  dispatch(removeError());
   return new Promise((resolve, reject) => {
     return apiCall("post", `https://twitee-api.herokuapp.com/${id}/posts`, post)
       .then((post) => {
         dispatch(addPost(post));
         dispatch(setLoading(false));
-        dispatch(removeError);
+        dispatch(removeError());
         resolve();
       })
       .catch((err) => {
@@ -35,6 +36,7 @@ export const createPost = (id, post) => (dispatch) => {
 
 export const deletePost = (id, postId) => (dispatch) => {
   dispatch(setLoading(true));
+  dispatch(removeError());
   return new Promise((resolve, reject) => {
     return apiCall(
       "delete",
@@ -42,7 +44,7 @@ export const deletePost = (id, postId) => (dispatch) => {
     )
       .then(() => {
         dispatch(setLoading(false));
-        dispatch(removeError);
+        dispatch(removeError());
         fetchPosts(id);
         resolve();
       })
@@ -56,6 +58,7 @@ export const deletePost = (id, postId) => (dispatch) => {
 
 export const likePost = (id, postId) => (dispatch) => {
   dispatch(setLoading(true));
+  dispatch(removeError());
   return new Promise((resolve, reject) => {
     return apiCall(
       "post",
@@ -63,7 +66,7 @@ export const likePost = (id, postId) => (dispatch) => {
     )
       .then(() => {
         dispatch(setLoading(false));
-        dispatch(removeError);
+        dispatch(removeError());
         fetchPosts(id);
         resolve();
       })
@@ -77,12 +80,13 @@ export const likePost = (id, postId) => (dispatch) => {
 
 export const fetchPosts = (id) => (dispatch) => {
   dispatch(setLoading(true));
+  dispatch(removeError());
   return new Promise((resolve, reject) => {
     return apiCall("get", `https://twitee-api.herokuapp.com/${id}/posts`)
       .then((posts) => {
         dispatch(loadPosts(posts));
         dispatch(setLoading(false));
-        dispatch(removeError);
+        dispatch(removeError());
         resolve();
       })
       .catch((err) => {
@@ -95,6 +99,7 @@ export const fetchPosts = (id) => (dispatch) => {
 
 export const createComment = (id, postId, comment) => (dispatch) => {
   dispatch(setLoading(true));
+  dispatch(removeError());
   return new Promise((resolve, reject) => {
     return apiCall(
       "post",
@@ -103,7 +108,7 @@ export const createComment = (id, postId, comment) => (dispatch) => {
     )
       .then(() => {
         dispatch(setLoading(false));
-        dispatch(removeError);
+        dispatch(removeError());
         fetchPosts(id);
         resolve();
       })

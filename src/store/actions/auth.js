@@ -22,6 +22,7 @@ export const logout = () => (dispatch) => {
 
 export const authUser = (type, userData) => (dispatch) => {
   dispatch(setLoading(true));
+  dispatch(removeError());
   return new Promise((resolve, reject) => {
     return apiCall("post", `https://twitee-api.herokuapp.com/${type}`, userData)
       .then(({ token, ...user }) => {
